@@ -1,0 +1,191 @@
+
+@model IEnumerable<CadastroClientes.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+
+    var clientes = Model.ToList();
+    var total = clientes.Count;
+    var ativos = clientes.Count(c => c.Ativo);
+    var inativos = total - ativos;
+}
+
+<div class="container py-4">
+
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Clientes</h2>
+            <p class="text-muted mb-0">
+                Gerencie seus clientes cadastrados.
+            </p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i>
+            Novo cliente
+        </a>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+            <div class="card indicador">
+                <div class="card-body">
+                    <i class="bi bi-people text-primary fs-4"></i>
+                    <h3 class="fw-bold mt-2 mb-0">@total</h3>
+                    <small class="text-muted">Total de clientes</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card indicador">
+                <div class="card-body">
+                    <i class="bi bi-person-check text-success fs-4"></i>
+                    <h3 class="fw-bold mt-2 mb-0">@ativos</h3>
+                    <small class="text-muted">Clientes ativos</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card indicador">
+                <div class="card-body">
+                    <i class="bi bi-person-x text-secondary fs-4"></i>
+                    <h3 class="fw-bold mt-2 mb-0">@inativos</h3>
+                    <small class="text-muted">Clientes inativos</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tabela de clientes -->
+    <div class="card painel-clientes">
+
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h6 class="fw-bold mb-0">Clientes cadastrados</h6>
+                <small class="text-muted">@total registros</small>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 tabela-clientes">
+
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Cidade</th>
+                        <th>Status</th>
+                        <th class="text-end">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var cliente in clientes)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <div class="avatar-cliente">
+                                        @(string.IsNullOrWhiteSpace(cliente.Nome)
+                                            ? "?"
+                                            : cliente.Nome.Substring(0, 1).ToUpper())
+                                    </div>
+
+                                    <div>
+                                        <div class="fw-semibold">
+                                            @cliente.Nome
+                                        </div>
+
+                                        <small class="text-muted">
+                                            @cliente.Email
+                                        </small>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>@cliente.Telefone</td>
+
+                            <td>@cliente.Cidade</td>
+
+                            <td>
+                                @if (cliente.Ativo)
+                                {
+                                    <span class="status-ativo">Ativo</span>
+                                }
+                                else
+                                {
+                                    <span class="status-inativo">Inativo</span>
+                                }
+                            </td>
+
+                            <td class="text-end text-nowrap">
+
+                                <a asp-action="Details"
+                                   asp-route-id="@cliente.Id"
+                                   class="btn btn-sm btn-outline-secondary"
+                                   title="Detalhes"
+                                   aria-label="Detalhes">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@cliente.Id"
+                                   class="btn btn-sm btn-outline-primary"
+                                   title="Editar"
+                                   aria-label="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@cliente.Id"
+                                   class="btn btn-sm btn-outline-danger"
+                                   title="Excluir"
+                                   aria-label="Excluir">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+
+                    @if (!clientes.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-5">
+                                <i class="bi bi-people fs-1 text-muted"></i>
+
+                                <h6 class="mt-3">
+                                    Nenhum cliente cadastrado
+                                </h6>
+
+                                <p class="text-muted">
+                                    Cadastre seu primeiro cliente.
+                                </p>
+
+                                <a asp-action="Create"
+                                   class="btn btn-primary btn-sm">
+                                    Novo cliente
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="card-footer bg-white text-muted small py-3">
+            Exibindo @total clientes cadastrados.
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,145 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow:
+    0 0 0 0.1rem white,
+    0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Fundo da aplicação */
+
+body {
+  background-color: #f4f6f9;
+  color: #1e293b;
+}
+
+/* Indicadores e painel */
+
+.indicador,
+.painel-clientes {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.indicador {
+  transition: transform 0.2s;
+}
+
+.indicador:hover {
+  transform: translateY(-3px);
+}
+
+.painel-clientes {
+  overflow: hidden;
+}
+
+/* Tabela */
+
+.tabela-clientes {
+  font-size: 14px;
+}
+
+.tabela-clientes thead th {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  white-space: nowrap;
+}
+
+.tabela-clientes tbody td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+.tabela-clientes tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Avatar */
+
+.avatar-cliente {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background-color: #dbeafe;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Status */
+
+.status-ativo,
+.status-inativo {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-ativo {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.status-inativo {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+/* Botões */
+
+.btn {
+  border-radius: 7px;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
